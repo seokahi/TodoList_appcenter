@@ -9,7 +9,7 @@ const membersRouter = require('./routes/members');
 const todosRouter = require('./routes/todos');
 
 const app = express();
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
   express: app,

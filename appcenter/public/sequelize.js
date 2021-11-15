@@ -62,7 +62,7 @@ document.querySelectorAll('#user-list tr').forEach((el) => {
           }
         });
         const retrievetodo = document.createElement('button');
-        retrievetodo.textContent = `${user.id} 할 일 조회`;
+        retrievetodo.textContent = `${user.id}번 회원 할 일 조회`;
         retrievetodo.addEventListener('click', async () => { 
               getTodolist(user.id);
         });
@@ -146,19 +146,19 @@ getUser();
   document.getElementById('user-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email=e.target.email.value;
-    const name = e.target.username.value;
     const age = e.target.age.value;
+    const name = e.target.username.value;
     if (!email) {
       return alert('이메일을 입력하세요');
-    }
-    if (!name) {
-      return alert('이름을 입력하세요');
     }
     if (!age) {
       return alert('나이를 입력하세요');
     }
+    if (!name) {
+      return alert('이름을 입력하세요');
+    }
     try {
-      await axios.post('/members', { email,name, age});
+      await axios.post('/members', { email,age, name});
       getUser();
     } catch (err) {
       console.error(err);
