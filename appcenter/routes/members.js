@@ -5,6 +5,7 @@ const Todo = require('../models/todo');
 const router = express.Router();
 
 router.route('/')
+//회원리스트 조회
   .get(async (req, res, next) => {
     try {
       const users = await User.findAll();
@@ -15,6 +16,7 @@ router.route('/')
       next(err);
     }
   })
+  //회원생성
   .post(async (req, res, next) => {
     try {
       const user = await User.create({
@@ -29,23 +31,25 @@ router.route('/')
       next(err);
     }
   });
-
-router.route('/:id')
-.get(async (req, res, next) => {
-  try {
-      const todos = await Todo.findAll({
-          include: {
-              model: User,
-              where: { id: req.params.id },
-          },
-      });
-      console.log(todos);
-      res.json(todos);
-  } catch (err) {
-      console.error(err);
-      next(err);
-  }
-})
+//회원단건조회
+  router.route('/:id')
+  .get(async (req, res, next) => {
+      try {
+          const todos = await User.findOne({
+              include: {
+                  model: Todo,
+                  required: false,
+                  where: { todolistuser: req.params.id },
+              },
+          });
+          console.log(todos);
+          res.json(todos);
+      } catch (err) {
+          console.error(err);
+          next(err);
+      }
+  })
+  //회원수정
 .patch(async (req, res, next) => {
   try {
     const result = await User.update({

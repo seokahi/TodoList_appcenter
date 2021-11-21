@@ -22,24 +22,10 @@ module.exports = class User extends Sequelize.Model {
         allowNull: false,
         unique: false,
       },
-      // created_at: {
-      //   type: Sequelize.DATE,
-      //   allowNull: false,
-      //   defaultValue: Sequelize.NOW,
-      // },
-      // updated_at: {
-      //   type: Sequelize.DATE,
-      //   allowNull: false,
-      //   defaultValue: Sequelize.NOW,
-      // },
-      todolist: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
-
     }, {
       sequelize,
       timestamps: true,
+      //true는 createdAt과  updatedAt을 알아서 해줌
       underscored: false,
       modelName: 'User',
       tableName: 'Users',
